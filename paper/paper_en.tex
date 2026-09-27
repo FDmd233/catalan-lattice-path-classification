@@ -1,0 +1,627 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1.08in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={A Catalan Classification of Extremal Even-Intersecting Lattice Paths},
+  pdfauthor={OpenAI}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\ind}[1]{\mathbf 1_{\{#1\}}}
+\newcommand{\A}{\mathcal A}
+\newcommand{\E}{\mathcal E}
+\newcommand{\U}{\mathcal U}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\Om}{\Omega}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\eps}{\varepsilon}
+
+\title{A Catalan Classification of Extremal Even-Intersecting Lattice Paths}
+\author{OpenAI}
+\date{September 27, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Shankar proved that a family of North-East lattice paths from $(0,0)$ to $(n,n)$ in which every two distinct paths have an even number of common edges has size at most $2^n$.  He constructed $C_n$ extremal families from the noncrossing perfect matchings of $[2n]$ and conjectured that these are all the extremal families.  I prove this conjecture.  The main step is an equality classification for the quadratic lemma underlying Shankar's upper bound: its equality cases are indexed by Dyck prefixes.  Two auxiliary rigidity statements, one for these Dyck-prefix partitions and one for the parity kernel on the Boolean cube, then determine the extremal relation completely.
+\end{abstract}
+
+\noindent\textbf{Keywords.} lattice paths, extremal set theory, Eventown, Catalan numbers, noncrossing matchings.\\
+\textbf{MSC 2020.} 05D05, 05A15.
+
+\section{Introduction}
+
+A North-East lattice path from $(0,0)$ to $(n,n)$ is a word in $\{E,N\}^{2n}$ with $n$ copies of each letter.  Two such paths are \emph{even-intersecting} if the number of common lattice edges is even.  Shankar \cite{Shankar} proved that every pairwise even-intersecting family has size at most $2^n$.  For a noncrossing perfect matching $M$ of $[2n]$, he also considered
+\begin{equation}\label{eq:FM}
+ \mathcal F_M=
+ \bigl\{w\in\{E,N\}^{2n}:\{w_i,w_j\}=\{E,N\}
+        \text{ for every }\{i,j\}\in M\bigr\}.
+\end{equation}
+Each $\mathcal F_M$ has size $2^n$ and is pairwise even-intersecting \cite[Section~4]{Shankar}.  Since the noncrossing perfect matchings of $[2n]$ are counted by the Catalan number $C_n$ (see, for example, \cite{Stanley}), this gives at least $C_n$ extremal families.  Shankar conjectured that there are no others \cite[Conjecture~4.1]{Shankar}.
+
+The purpose of this note is to prove the conjecture in its stronger structural form.
+
+\begin{theorem}\label{thm:main}
+Let $\mathcal F$ be a family of lattice paths from $(0,0)$ to $(n,n)$ such that every two distinct members have an even number of common edges.  If $|\mathcal F|=2^n$, then there is a unique noncrossing perfect matching $M$ of $[2n]$ for which
+\[
+ \mathcal F=\mathcal F_M.
+\]
+Consequently there are exactly $C_n$ extremal families.
+\end{theorem}
+
+The proof follows the equality structure in Shankar's argument rather than introducing a different upper bound.  I will use three ingredients.  First, equality in the quadratic lemma from \cite{Shankar} is classified by Dyck prefixes.  Second, two such equality partitions cannot be cross-compatible unless their Dyck prefixes have the same matched edges.  Third, a weight-preserving automorphism of the Boolean cube that preserves the path-intersection parity kernel is trivial.  These points are elementary, but the equality conditions have to be tracked without losing their quantifiers.
+
+\section{The parity kernel and Dyck-prefix partitions}
+
+Identify an $m$-step path with a word $x=x_1\cdots x_m\in\bits^m$, where $1=N$ and $0=E$.  Write $\wt(x)=\sum_i x_i$.  Following \cite{Shankar}, put
+\[
+ B_m(x,y)=|E(x)\cap E(y)|\pmod 2\in\F_2.
+\]
+Equivalently,
+\begin{equation}\label{eq:Bdef}
+ B_m(x,y)=
+ \sum_{i=1}^m
+ \ind{x_i=y_i}\,
+ \ind{\sum_{j<i}x_j=\sum_{j<i}y_j}
+ \quad\text{in }\F_2.
+\end{equation}
+In particular $B_m(x,x)=m\pmod2$.
+
+The last coordinate gives the basic recurrence.  If $p,q\in\bits^{m-1}$ and $\alpha,\beta\in\bits$, then
+\begin{equation}\label{eq:recurrence}
+ B_m(p\alpha,q\beta)
+ =B_{m-1}(p,q)
+  +\ind{\alpha=\beta}\ind{\wt(p)=\wt(q)}.
+\end{equation}
+
+\subsection{Dyck-prefix blocks}
+
+A \emph{Dyck prefix} of length $m$ is a word $P=P_1\cdots P_m$ in the alphabet $\{U,D\}$ whose height never becomes negative.  Match every $D$ to the most recent unmatched $U$.  Let $\E(P)$ be the resulting noncrossing partial matching on $[m]$, and let
+\[
+ u_1<\cdots<u_r
+\]
+be the unmatched positions.  If $k=|\E(P)|$, then $m=2k+r$.
+
+For $\eps=(\eps_1,\ldots,\eps_r)\in\bits^r$ define
+\begin{equation}\label{eq:dyckblock}
+ \A_{\eps}(P)=
+ \left\{x\in\bits^m:
+   x_a\ne x_b\ \text{for every }\{a,b\}\in\E(P),\quad
+   x_{u_i}=\eps_i\ (1\le i\le r)
+ \right\}.
+\end{equation}
+Thus every block has size $2^k$ and lies in the weight level $k+\wt(\eps)$.  Put
+\[
+ \Om(P)=\bigcup_{\eps\in\bits^r}\A_{\eps}(P).
+\]
+
+The next cancellation fact is the reason these blocks appear naturally.
+
+\begin{lemma}[cancellation]\label{lem:cancellation}
+Let $P$ be a Dyck prefix of length $m$.  Suppose $x,y\in\Om(P)$, and delete from both words every coordinate belonging to an edge of $\E(P)$.  If the resulting words are $\bar x,\bar y\in\bits^r$, then
+\begin{equation}\label{eq:quotient}
+ B_m(x,y)=B_r(\bar x,\bar y).
+\end{equation}
+In particular, if $x\in\A_{\eps}(P)$ and $y\in\A_{\eta}(P)$, then
+\begin{equation}\label{eq:blockkernel}
+ B_m(x,y)=B_r(\eps,\eta).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+No unmatched position of a Dyck prefix can lie strictly inside a matched edge: otherwise it would still be on top of the stack when that edge closed.  Hence every nonempty matching $\E(P)$ contains an innermost edge $\{i,i+1\}$.  Both $x$ and $y$ use one $0$ and one $1$ at these two positions.  If the orientations agree, the two positions contribute either two common edges or none; if the orientations disagree, they contribute none.  Hence their contribution is even.  After the two positions are deleted, both paths have been translated by the same vector $(1,1)$ from that point onward, so all later common-edge incidences are unchanged.  Deleting innermost edges successively proves \eqref{eq:quotient}.
+\end{proof}
+
+It follows at once that the blocks \eqref{eq:dyckblock} satisfy the three compatibility conditions that will occur in Section~\ref{sec:equality}: within a block the value of $B_m$ is $r\equiv m\pmod2$, while on a product of two blocks it is constant.
+
+We shall also need a two-step test.  For $s\ge1$, write a word of length $s+1$ as $z\alpha\beta$ with $z\in\bits^{s-1}$.
+
+\begin{lemma}[square test]\label{lem:square}
+For $y=y'\beta\gamma\in\bits^{s+1}$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+ \item $B_{s+1}(z10,y)=B_{s+1}(z01,y)$ for every $z\in\bits^{s-1}$;
+ \item $\beta\ne\gamma$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $h=\wt(z)$ and $q=\wt(y')$.  Applying \eqref{eq:recurrence} twice gives
+\begin{align*}
+&B_{s+1}(z10,y'\beta\gamma)+B_{s+1}(z01,y'\beta\gamma)\\
+&\qquad=
+ \ind{h=q}
+ +\ind{\gamma=0}\ind{h=q+\beta-1}
+ +\ind{\gamma=1}\ind{h=q+\beta}.
+\end{align*}
+If $\beta\ne\gamma$, the right-hand side is identically zero.  If $\beta=\gamma=0$, take $h=q$; if $\beta=\gamma=1$, again take $h=q$.  Since $0\le q\le s-1$, such a word $z$ exists, and the displayed value is then $1$.
+\end{proof}
+
+\subsection{Cross-rigidity}
+
+For Dyck prefixes $P,Q$ of the same length, write $P\preccurlyeq Q$ if, for every block $A$ of the partition $\{\A_{\eps}(P)\}$, every $x,x'\in A$, and every $y\in\Om(Q)$,
+\begin{equation}\label{eq:preceq}
+ B_m(x,y)=B_m(x',y).
+\end{equation}
+Thus changing the orientations of the matched edges of $P$ is invisible to every word satisfying the matching constraints of $Q$.
+
+\begin{lemma}\label{lem:oneway}
+For Dyck prefixes $P,Q$ of length $m$,
+\[
+ P\preccurlyeq Q \quad\Longrightarrow\quad \E(P)\subseteq\E(Q).
+\]
+\end{lemma}
+
+\begin{proof}
+I use induction on $m$.  Remove the last symbol from $P$ and $Q$, obtaining Dyck prefixes $P^-$ and $Q^-$.  Every word in $\Om(Q^-)$ can be extended to a word in $\Om(Q)$: if the last symbol of $Q$ is $U$, choose either last bit; if it is $D$, the last bit is forced to be opposite to the bit at its matched opener.  Likewise, any two words in the same block for $P^-$ can be extended with a common last bit to two words in one block for $P$; when the last symbol of $P$ is $D$, the bit at its opener is fixed inside a block of $P^-$.  Since all words in one block have the same weight, the correction term in \eqref{eq:recurrence} is the same for the two extensions.  Hence
+\[
+ P^-\preccurlyeq Q^-.
+\]
+By induction, $\E(P^-)\subseteq\E(Q^-)$.
+
+If the last symbol of $P$ is $U$, this already gives $\E(P)\subseteq\E(Q)$.  Suppose instead that it is $D$, and let $e$ be its matched edge.  Delete from both prefixes all vertices belonging to the common matching $\E(P^-)$.  More precisely, apply Lemma~\ref{lem:cancellation} to the Dyck prefix $P^-U$, whose matching is exactly $\E(P^-)$.  The relation $\preccurlyeq$ survives this deletion; deleting complete matched pairs also preserves the Dyck-prefix property.  The reduced prefix coming from $P$ has the form
+\[
+ U^sD
+\]
+for some $s\ge1$: all surviving vertices before the final $D$ are unmatched, and the last of them is its opener.  Let $Q'$ be the reduced prefix coming from $Q$.
+
+A block of $U^sD$ is $\{z10,z01\}$ for some $z\in\bits^{s-1}$.  Thus, for every $y\in\Om(Q')$,
+\[
+ B_{s+1}(z10,y)=B_{s+1}(z01,y)
+ \qquad\text{for all }z\in\bits^{s-1}.
+\]
+Lemma~\ref{lem:square} gives $y_s\ne y_{s+1}$ for every $y\in\Om(Q')$.  In a Dyck-prefix matching, two positions have opposite bits in every word of $\Om(Q')$ if and only if they are matched to one another: if they lie on different matching edges, or if one of them is unmatched, the relevant orientations and unmatched bits can be chosen independently to make the two bits equal.  Therefore $\{s,s+1\}\in\E(Q')$.  Lifting this edge back gives $e\in\E(Q)$.
+\end{proof}
+
+\begin{proposition}[cross-rigidity]\label{prop:crossrigidity}
+Let $P,Q$ be Dyck prefixes of length $m$.  Suppose that $B_m$ is constant on
+\[
+ \A_{\eps}(P)\times\A_{\eta}(Q)
+\]
+for every pair of labels $\eps,\eta$.  Then $P=Q$.
+\end{proposition}
+\begin{proof}
+The hypothesis gives $P\preccurlyeq Q$.  Since $B_m$ is symmetric, it also gives $Q\preccurlyeq P$.  Lemma~\ref{lem:oneway} yields $\E(P)=\E(Q)$.  A Dyck prefix is determined by its matching edges: the right endpoints are the $D$-positions, and every other position is a $U$-position.  Hence $P=Q$.
+\end{proof}
+
+\section{Equality in the quadratic lemma}\label{sec:equality}
+
+Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  I state the equality classification at the same time.
+
+\begin{theorem}[quadratic equality classification]\label{thm:quadratic}
+Let $A_1,\ldots,A_t$ be pairwise disjoint subsets of $\bits^m$ such that
+\begin{enumerate}[label=(\roman*)]
+ \item each $A_i$ is contained in one Hamming-weight level;
+ \item $B_m(x,y)=m\pmod2$ for all $x,y\in A_i$;
+ \item for $i\ne j$, the function $B_m$ is constant on $A_i\times A_j$.
+\end{enumerate}
+Then
+\begin{equation}\label{eq:quadratic}
+ \sum_{i=1}^t |A_i|^2\le2^m.
+\end{equation}
+Equality holds if and only if there is a Dyck prefix $P$ of length $m$ such that, up to reordering,
+\[
+ \{A_1,\ldots,A_t\}
+ =\{\A_{\eps}(P):\eps\in\bits^r\},
+\]
+where $r$ is the number of unmatched positions of $P$.  The prefix $P$ is unique.
+\end{theorem}
+
+The only genuinely local obstruction in the equality analysis is the following Boolean-cube lemma.  It will also be used later for automorphisms.
+
+For $x,y\in\bits^d$, set
+\[
+ \Delta_{x,y}(z)=B_d(x,z)+B_d(y,z)\in\F_2.
+\]
+Let $\cL_j^{(d)}=\{z\in\bits^d:\wt(z)=j\}$, with the convention that this set is empty if $j\notin\{0,\ldots,d\}$.
+
+\begin{lemma}[localized pairs]\label{lem:localized}
+Let $u,v\in\bits^d$ satisfy $\wt(u)=k+1$ and $\wt(v)=k$.  Assume
+\begin{equation}\label{eq:localized}
+ \Delta_{u,v}(z)=0
+ \qquad\text{whenever }\wt(z)\notin\{k,k+1\}.
+\end{equation}
+Then either
+\begin{equation}\label{eq:canonicalpair}
+ u=t1,\qquad v=t0
+\end{equation}
+for some $t\in\bits^{d-1}$, or $d=2k+1\ge3$ and
+\begin{equation}\label{eq:exceptionalpair}
+ u=1(10)^k,\qquad v=0(01)^k.
+\end{equation}
+For the exceptional pair,
+\begin{equation}\label{eq:exceptionalprofile}
+ \Delta_{u,v}(z)=1
+ \quad\Longleftrightarrow\quad
+ \wt(z)\in\{k,k+1\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $u=p\alpha$, $v=q\beta$, and $z\gamma$ for the test word.  From \eqref{eq:recurrence},
+\begin{equation}\label{eq:delta-rec}
+ \Delta_{p\alpha,q\beta}(z\gamma)
+ =\Delta_{p,q}(z)
+ +\ind{\alpha=\gamma}\ind{\wt(p)=\wt(z)}
+ +\ind{\beta=\gamma}\ind{\wt(q)=\wt(z)}.
+\end{equation}
+I record the short finite-state argument, since it prevents a hidden exceptional case.
+
+First consider the following auxiliary states.
+\begin{itemize}[leftmargin=2em]
+ \item $S_d(k)$: $\wt(x)=\wt(y)=k$ and $\supp\Delta_{x,y}\subseteq\cL_k^{(d)}$;
+ \item $E_d(k)$: $\wt(x)=\wt(y)=k$ and $\Delta_{x,y}=\ind{\cL_k^{(d)}}$;
+ \item $L_d^-(k)$: $\wt(x)=k+1$, $\wt(y)=k$, and $\supp\Delta_{x,y}\subseteq\cL_k^{(d)}$;
+ \item $L_d^+(k)$: the same weight condition, with support contained in $\cL_{k+1}^{(d)}$.
+\end{itemize}
+A simultaneous induction on $d$, using \eqref{eq:delta-rec}, gives
+\begin{equation}\label{eq:auxstates}
+ S_d(k)\Longrightarrow x=y,
+ \qquad E_d(k),L_d^-(k),L_d^+(k)\text{ are impossible.}
+\end{equation}
+For completeness, here is the entire transition check.  In the state $E_d(k)$, equal terminal bits are impossible because the left side of \eqref{eq:delta-rec} is then independent of $\gamma$ while the target value changes between two consecutive weight layers; unequal terminal bits force $\Delta_{p,q}\equiv0$ for a pair of adjacent weights, contradicting the induction hypothesis for $L^-\!/L^+$.  For $L_d^-(k)$, the terminal patterns $00$ and $01$ give an immediate contradiction by evaluating \eqref{eq:delta-rec} on a word of weight $k+1$; the pattern $10$ reduces to $E_{d-1}(k)$, while $11$ reduces to $L_{d-1}^+(k-1)$.  Simultaneous complementation preserves common-edge parity.  Thus, after complementing the two words and the test word and then swapping the first two words, an $L^+$ state becomes an $L^-$ state.  Finally, in $S_d(k)$, equal terminal bits force $\Delta_{p,q}\equiv0$, so induction gives $p=q$; unequal terminal bits again force an adjacent-weight pair with zero profile, contradicting $L^-\!/L^+$.
+
+It remains to track two alternating states.  Let
+\begin{align*}
+ M_d(k):&\quad \wt(x)=k+1,\ \wt(y)=k-1,
+     \quad\supp\Delta_{x,y}\subseteq\cL_k^{(d)},\\
+ T_d(k):&\quad \wt(x)=k+1,\ \wt(y)=k,
+     \quad\Delta_{x,y}=\ind{\cL_k^{(d)}\cup\cL_{k+1}^{(d)}}.
+\end{align*}
+The terminal check is again immediate from \eqref{eq:delta-rec}, but I include it explicitly.  In an $M_d(k)$ state, the patterns $00$ and $01$ are contradicted by testing a word of weight $k+1$, while $11$ is contradicted by testing a word of weight $k-2$ (the pattern is feasible only when that layer is nonempty).  The only surviving pattern is $10$, and the prefix then has value $1$ on exactly the two layers $k-1,k$; hence it is a $T_{d-1}(k-1)$ pair.  In a $T_d(k)$ state with $d>1$, the patterns $00$ and $11$ are contradicted by testing a prefix word of weight $k$, and $10$ gives the same value for the two last-bit choices although the target values differ on one of the adjacent nonempty layers.  Thus only $01$ survives, and \eqref{eq:delta-rec} says that its prefix has support exactly on layer $k$, so it is an $M_{d-1}(k)$ pair.  Since $T_1(0)$ consists only of $(1,0)$, induction gives
+\begin{align}
+ M_{2k}(k)&:\quad
+ (x,y)=\bigl(11(01)^{k-1},\ 00(10)^{k-1}\bigr)\qquad(k\ge1),\label{eq:Mform}\\
+ T_{2k+1}(k)&:\quad
+ (x,y)=\bigl(1(10)^k,\ 0(01)^k\bigr).\label{eq:Tform}
+\end{align}
+No $M$ or $T$ state occurs in the opposite parity.
+
+Now apply \eqref{eq:delta-rec} to a pair satisfying \eqref{eq:localized}.  According to the terminal pattern $(\alpha,\beta)$, its prefix lies in the following state:
+\[
+\begin{array}{c|c|c}
+(\alpha,\beta)&\text{prefix state}&\text{consequence}\\ \hline
+00&L^-&\text{impossible}\\
+11&L^+&\text{impossible}\\
+10&S&p=q\\
+01&M&\text{the alternating pair \eqref{eq:exceptionalpair}.}
+\end{array}
+\]
+The $10$ case is exactly \eqref{eq:canonicalpair}.  The $01$ case, together with \eqref{eq:Mform}, yields \eqref{eq:exceptionalpair}; its profile is \eqref{eq:exceptionalprofile} by \eqref{eq:Tform}.  When $d=1$, this alternating pair is the canonical pair itself, so the exceptional alternative is new only for $d\ge3$.
+\end{proof}
+
+We next isolate the reconstruction step that occurs after the two inductive halves have become the same Dyck-prefix partition.
+
+
+For a family $\mathcal C=\{C_i\}$ of subsets of $\bits^{r+1}$, write
+\[
+ C_i^a=\{z\in\bits^r:za\in C_i\},\qquad a\in\bits,
+\]
+let $I(\mathcal C)$ be the indices for which both $C_i^0$ and $C_i^1$ are nonempty, and define
+\begin{align*}
+ \mathcal G_0(\mathcal C)&=\{C_i^0:C_i^0\ne\varnothing\}\cup\{C_i^1:i\in I(\mathcal C)\},\\
+ \mathcal G_1(\mathcal C)&=\{C_i^1:C_i^1\ne\varnothing\}\cup\{C_i^0:i\in I(\mathcal C)\}.
+\end{align*}
+These are the two split families used in Shankar's induction.
+
+\begin{lemma}[reconstruction]\label{lem:reconstruction}
+Let $r\ge0$.  Suppose a family $\mathcal C$ of subsets of $\bits^{r+1}$ satisfies the three conditions of Theorem~\ref{thm:quadratic}, and suppose
+\[
+ \mathcal G_0(\mathcal C)=\mathcal G_1(\mathcal C)
+ =\bigl\{\{z\}:z\in\bits^r\bigr\}.
+\]
+Then exactly one of the following holds:
+\begin{enumerate}[label=(\alph*)]
+ \item
+ $\mathcal C=\bigl\{\{z0\},\{z1\}:z\in\bits^r\bigr\}$;
+ \item $r\ge1$ and
+ \[
+ \mathcal C=\bigl\{\{t10,t01\}:t\in\bits^{r-1}\bigr\}.
+ \]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Every member of $\mathcal C$ has one or two elements.  More precisely, each label $z\in\bits^r$ either contributes the two singleton blocks $\{z0\},\{z1\}$, or it is paired with another label: a two-element block has the form
+\begin{equation}\label{eq:splitblock}
+ \{u0,v1\},\qquad \wt(u)=\wt(v)+1.
+\end{equation}
+The labels used in such two-element blocks are disjoint.
+
+Fix a block \eqref{eq:splitblock}, and write $k=\wt(v)$.  If a label $z$ is unpaired, cross-constancy with the two singleton blocks $\{z0\}$ and $\{z1\}$ gives
+\begin{equation}\label{eq:singleinteraction}
+ \Delta_{u,v}(z)=\ind{\wt(z)=k+1}
+                 =\ind{\wt(z)=k}.
+\end{equation}
+If another two-element block is $\{a0,b1\}$, comparison of the two rows in its two columns gives
+\begin{equation}\label{eq:pairinteraction}
+ \Delta_{u,v}(a)=\ind{\wt(a)=k+1},
+ \qquad
+ \Delta_{u,v}(b)=\ind{\wt(b)=k}.
+\end{equation}
+Equations \eqref{eq:singleinteraction}--\eqref{eq:pairinteraction} imply that $\Delta_{u,v}$ vanishes outside the two levels $k,k+1$.  Lemma~\ref{lem:localized} therefore says that every paired block is canonical,
+\[
+ \{t10,t01\},
+\]
+except possibly for the unique alternating pair in odd dimension.
+
+I first rule out that exception.  Suppose $r=2s+1\ge3$ and
+\[
+ u=1(10)^s,\qquad v=0(01)^s.
+\]
+By \eqref{eq:exceptionalprofile} and \eqref{eq:singleinteraction}--\eqref{eq:pairinteraction}, every word of weight $s+1$ must occur as a high endpoint and every word of weight $s$ as a low endpoint.  All other pairs are canonical.  A canonical high endpoint ends in $1$, while a canonical low endpoint ends in $0$.  If $s\ge2$, there are $\binom{2s}{s-1}>1$ weight-$s$ words ending in $1$, so one of them is different from $v$; it can be neither the exceptional low endpoint nor a canonical low endpoint, a contradiction.  If $s=1$, the exceptional block is $\{1100,0011\}$ and one forced canonical block is $\{0110,0101\}$.  Their $B_4$-matrix is
+\[
+ \begin{pmatrix}1&0\\1&0\end{pmatrix},
+\]
+contrary to cross-constancy.  Thus no exceptional pair occurs.
+
+It remains to show that the canonical pairs are either absent or all present.  Suppose the pair indexed by $t\in\bits^{r-1}$ is present, and put $h=\wt(t)$.  For $u=t1$ and $v=t0$, recurrence \eqref{eq:recurrence} gives
+\begin{equation}\label{eq:canonicalprofile}
+ \Delta_{u,v}(z)=1
+ \quad\Longleftrightarrow\quad
+ \wt(z_1\cdots z_{r-1})=h.
+\end{equation}
+No label of total weight $h$ or $h+1$ can be unpaired by \eqref{eq:singleinteraction}.  Combining \eqref{eq:canonicalprofile} with \eqref{eq:pairinteraction} shows that the labels
+\[
+ s0\ (\wt(s)=h),\quad
+ s1\ (\wt(s)=h-1),\quad
+ s1\ (\wt(s)=h),\quad
+ s0\ (\wt(s)=h+1)
+\]
+must respectively be low, high, high, and low endpoints.  Hence every canonical pair indexed by a prefix of weight $h-1$, $h$, or $h+1$ is present.  Iterating over the connected sequence of weight levels $0,1,\ldots,r-1$ forces all canonical pairs.  This proves the dichotomy.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:quadratic}]
+I prove the inequality and its equality statement simultaneously by induction on $m$.  The case $m=0$ is immediate.  For every $i$, write
+\[
+ A_i^a=\{x\in\bits^{m-1}:xa\in A_i\},\qquad a\in\bits,
+\]
+and let $I$ be the set of indices for which both $A_i^0$ and $A_i^1$ are nonempty.  Consider the two collections of nonempty sets
+\begin{align*}
+ \mathcal G_0&=\{A_i^0:A_i^0\ne\varnothing\}\cup\{A_i^1:i\in I\},\\
+ \mathcal G_1&=\{A_i^1:A_i^1\ne\varnothing\}\cup\{A_i^0:i\in I\}.\end{align*}
+Each collection satisfies the three hypotheses in dimension $m-1$.  The weight condition is immediate, and \eqref{eq:recurrence} transfers internal and cross-constancy.  I spell out the only delicate point, disjointness.  Suppose, for example, that
+\[
+ u\in A_j^0\cap A_i^1
+\]
+with $i\in I$.  If $i=j$, then $u0,u1\in A_i$ but $B_m(u0,u1)=m-1$, contradicting (ii).  Thus $i\ne j$.  Choose $x\in A_i^0$.  Then $u1,x0\in A_i$, so $B_m(u1,x0)=m$.  Since these two words have the same total weight, $\wt(x)=\wt(u)+1$, and \eqref{eq:recurrence} gives
+\[
+ B_m(u0,x0)=B_m(u1,x0)=m.
+\]
+On the other hand $B_m(u0,u1)=m-1$.  This contradicts constancy on $A_j\times A_i$.  The other possible overlap is symmetric.
+
+Put $a_i=|A_i^0|$ and $b_i=|A_i^1|$.  By induction,
+\begin{align}
+ \sum_{i\notin I}a_i^2+\sum_{i\in I}(a_i^2+b_i^2)&\le2^{m-1},\label{eq:G0bound}\\
+ \sum_{i\notin I}b_i^2+\sum_{i\in I}(a_i^2+b_i^2)&\le2^{m-1}.\label{eq:G1bound}
+\end{align}
+For $i\in I$,
+\[
+ (a_i+b_i)^2\le2a_i^2+2b_i^2,
+\]
+with equality exactly when $a_i=b_i$.  Adding \eqref{eq:G0bound} and \eqref{eq:G1bound} proves \eqref{eq:quadratic}.
+
+Assume now that equality holds.  Then both \eqref{eq:G0bound} and \eqref{eq:G1bound} are equalities and $a_i=b_i$ for every $i\in I$.  By induction there are Dyck prefixes $P,Q$ of length $m-1$ such that $\mathcal G_0$ and $\mathcal G_1$ are their block partitions.  Moreover $B_{m-1}$ is constant on every block of $\mathcal G_0$ times every block of $\mathcal G_1$: if the two prefix blocks come from $A_i^\alpha$ and $A_j^\beta$, this follows from \eqref{eq:recurrence}, since its correction term is constant on that product and $B_m$ is constant on $A_i\times A_j$ (also when $i=j$).  Proposition~\ref{prop:crossrigidity} yields $P=Q$.
+
+Delete from every prefix word the coordinates belonging to $\E(P)$.  Equivalently, apply Lemma~\ref{lem:cancellation} to the Dyck prefix $PU$, whose last position is unmatched; this preserves all $B$-conditions, including the final bit of the original words.  Since every block of $P$ collapses to one label in $\bits^r$, the reduced reconstruction is exactly the situation of Lemma~\ref{lem:reconstruction}.  In case (a) the new Dyck prefix is $PU$; in case (b) it is $PD$.  This completes the induction and proves existence.  Conversely, if $P$ has $k$ matched edges and $r$ unmatched positions, Lemma~\ref{lem:cancellation} shows that its blocks satisfy (i)--(iii), and
+\[
+ \sum_{\eps\in\bits^r}|\A_{\eps}(P)|^2
+ =2^r(2^k)^2=2^{2k+r}=2^m.
+\]
+Thus every Dyck-prefix partition is indeed an equality case.
+
+For uniqueness, note that from the union $\Om(P)$ one recovers the matching by
+\[
+ \{i,j\}\in\E(P)
+ \quad\Longleftrightarrow\quad
+ x_i\ne x_j\ \text{for every }x\in\Om(P).
+\]
+If $i,j$ are not matched, their bits can be made equal by independently orienting their matching edges and choosing unmatched bits.  Hence the equality partition determines $P$.
+\end{proof}
+
+\section{Rigidity on the Boolean cube}
+
+The final equality step produces a bijection of the unmatched labels.  The next proposition shows that this bijection cannot be nontrivial.
+
+\begin{proposition}[cube rigidity]\label{prop:cuberigidity}
+Let $\phi:\bits^r\to\bits^r$ be a bijection satisfying
+\begin{equation}\label{eq:phi}
+ \wt(\phi(x))=\wt(x),\qquad
+ B_r(\phi(x),\phi(y))=B_r(x,y)
+\end{equation}
+for all $x,y\in\bits^r$.  Then $\phi$ is the identity.
+\end{proposition}
+
+\begin{proof}
+For words of adjacent weights, define an intrinsic relation
+\[
+ u\sim v
+ \quad\Longleftrightarrow\quad
+ \wt(u)=\wt(v)+1
+ \ \text{and}\ 
+ \Delta_{u,v}(z)=0
+ \text{ outside the two levels }\wt(v),\wt(u).
+\]
+Lemma~\ref{lem:localized} identifies all edges of this relation.  They are the canonical edges
+\begin{equation}\label{eq:canonicalmatching}
+ t1\sim t0\qquad(t\in\bits^{r-1}),
+\end{equation}
+plus, when $r\ge3$ is odd, the single exceptional edge
+\[
+ 1(10)^{(r-1)/2}\sim0(01)^{(r-1)/2}.
+\]
+The relation is preserved by $\phi$ because both weight and $B_r$ are preserved.
+
+If $r$ is even, \eqref{eq:canonicalmatching} is therefore preserved as a set.  If $r\ge3$ is odd, the two endpoints of the exceptional edge are the only vertices of degree two in the relation graph; hence the exceptional edge is intrinsically distinguished, and after removing it the canonical matching is again preserved.  The cases $r=0,1$ are immediate.  Thus in all cases $\phi$ maps every canonical pair to a canonical pair.  Weight preservation prevents the two endpoints from being exchanged, so there is a weight-preserving bijection $\psi:\bits^{r-1}\to\bits^{r-1}$ such that
+\[
+ \phi(t\alpha)=\psi(t)\alpha
+ \qquad(t\in\bits^{r-1},\ \alpha\in\bits).
+\]
+Since the last bits differ,
+\[
+ B_r(t0,s1)=B_{r-1}(t,s).
+\]
+Using \eqref{eq:phi},
+\[
+ B_{r-1}(\psi(t),\psi(s))
+ =B_r(\phi(t0),\phi(s1))
+ =B_r(t0,s1)
+ =B_{r-1}(t,s).
+\]
+Hence $\psi$ satisfies the same hypotheses in dimension $r-1$.  Induction gives $\psi=\mathrm{id}$ and therefore $\phi=\mathrm{id}$.
+\end{proof}
+
+\section{Extremal relations}
+
+Call a relation $R\subseteq\bits^n\times\bits^n$ \emph{admissible} if
+\begin{equation}\label{eq:admissible}
+ \wt(x)=\wt(y)\quad((x,y)\in R)
+\end{equation}
+and
+\begin{equation}\label{eq:admissibleB}
+ B_n(x,x')=B_n(y,y')
+ \quad\text{for all }(x,y),(x',y')\in R.
+\end{equation}
+Shankar proved that every admissible relation has at most $2^n$ elements \cite[Lemma~2.2]{Shankar}.  Theorem~\ref{thm:quadratic} gives its complete equality case.
+
+\begin{proposition}\label{prop:relation}
+If $R\subseteq\bits^n\times\bits^n$ is admissible and $|R|=2^n$, then there are Dyck prefixes $P,Q$ of length $n$, with the same number $r$ of unmatched positions, such that
+\begin{equation}\label{eq:relationform}
+ R=\bigcup_{\eps\in\bits^r}
+ \A_{\eps}(P)\times\A_{\eps}(Q).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Form the bipartite graph whose edges are the pairs in $R$, and ignore isolated vertices.  Let $A_j$ and $B_j$ be the left and right vertex sets of its connected components.  If two left vertices $x,x'$ have a common neighbor $y$, then \eqref{eq:admissibleB} gives
+\[
+ B_n(x,x')=B_n(y,y)=n\pmod2.
+\]
+An induction on graph distance along an alternating path shows the same for any two vertices in one $A_j$, and similarly in one $B_j$: if $x_0-y_1-x_1-\cdots-y_\ell-x_\ell$ is a shortest alternating path, then \eqref{eq:admissibleB} gives $B_n(x_0,x_\ell)=B_n(y_1,y_\ell)$, and the latter pair has smaller distance.  Also, \eqref{eq:admissible} makes each $A_j$ and $B_j$ weight-homogeneous.  Finally, if $A_i$ and $A_j$ are different components, then $B_n$ is constant on $A_i\times A_j$.  Indeed, if $x,x'\in A_i$ share a neighbor $y$ and $(a,b)$ is any edge of the other component, then
+\[
+ B_n(x,a)=B_n(y,b)=B_n(x',a).
+\]
+Connectivity lets one move either endpoint, so the value is constant.  The same holds on the right.  Thus both collections satisfy Theorem~\ref{thm:quadratic}.
+
+The standard component estimate is
+\begin{equation}\label{eq:componentchain}
+ |R|
+ \le \sum_j|A_j||B_j|
+ \le\left(\sum_j|A_j|^2\right)^{1/2}
+      \left(\sum_j|B_j|^2\right)^{1/2}
+ \le2^n.
+\end{equation}
+Since $|R|=2^n$, equality holds throughout.  In particular every component is complete bipartite, and both quadratic sums equal $2^n$.  Theorem~\ref{thm:quadratic} gives Dyck prefixes $P,Q$ whose block partitions are $\{A_j\}$ and $\{B_j\}$.  If their numbers of unmatched positions are $r_P,r_Q$, then the common number of components is both $2^{r_P}$ and $2^{r_Q}$, so $r_P=r_Q=:r$.  Consequently $P$ and $Q$ also have the same number $k=(n-r)/2$ of matched edges.
+
+Index the blocks of $P$ by $\eps\in\bits^r$.  The components give a bijection $\phi:\bits^r\to\bits^r$ such that
+\[
+ R=\bigcup_{\eps\in\bits^r}
+ \A_{\eps}(P)\times\A_{\phi(\eps)}(Q).
+\]
+A word in $\A_{\eps}(P)$ has weight $k+\wt(\eps)$, and a word in $\A_{\phi(\eps)}(Q)$ has weight $k+\wt(\phi(\eps))$.  Completeness of the component and \eqref{eq:admissible} therefore give
+\[
+ \wt(\phi(\eps))=\wt(\eps).
+\]
+For labels $\eps,\eta$, choose arbitrary words in the two corresponding complete components.  Equation \eqref{eq:admissibleB}, followed by Lemma~\ref{lem:cancellation}, gives
+\[
+ B_r(\phi(\eps),\phi(\eta))=B_r(\eps,\eta).
+\]
+Proposition~\ref{prop:cuberigidity} gives $\phi=\mathrm{id}$, proving \eqref{eq:relationform}.
+\end{proof}
+
+\section{Proof of the Catalan classification}
+
+Let $F=f_1\cdots f_{2n}$ be a path from $(0,0)$ to $(n,n)$, viewed as a balanced binary word, and define
+\begin{equation}\label{eq:uv}
+ u(F)=(f_1,\ldots,f_n),\qquad
+ v(F)=(1-f_{2n},\ldots,1-f_{n+1}).
+\end{equation}
+Then $\wt(u(F))=\wt(v(F))$.  Conversely every pair $(u,v)$ of equal weight reconstructs a unique balanced word by taking first half $u$ and second half the reversed complement of $v$.  Thus \eqref{eq:uv} is a bijection between paths from $(0,0)$ to $(n,n)$ and equal-weight pairs in $\bits^n\times\bits^n$.
+
+Reversing and complementing the second half is a reflection of that half-path and preserves common edges.  Therefore, for any two balanced paths $F,G$,
+\begin{equation}\label{eq:halfdecomp}
+ B_{2n}(F,G)
+ =B_n(u(F),u(G))+B_n(v(F),v(G))
+ \qquad\text{in }\F_2,
+\end{equation}
+which is Observation~2.1 of \cite{Shankar}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $\mathcal F$ be extremal and let
+\[
+ R=\{(u(F),v(F)):F\in\mathcal F\}.
+\]
+By \eqref{eq:halfdecomp}, the even-intersection hypothesis says exactly that $R$ is admissible for distinct pairs; for a pair with itself, both sides of \eqref{eq:admissibleB} equal $n\pmod2$, so admissibility holds in full.  Since $|R|=2^n$, Proposition~\ref{prop:relation} gives Dyck prefixes $P,Q$ of length $n$ with $r$ unmatched positions and
+\[
+ R=\bigcup_{\eps\in\bits^r}
+ \A_{\eps}(P)\times\A_{\eps}(Q).
+\]
+Write the unmatched positions as
+\[
+ a_1<\cdots<a_r\quad\text{in }P,
+ \qquad
+ b_1<\cdots<b_r\quad\text{in }Q.
+\]
+Construct a matching $M$ on $[2n]$ as follows:
+\begin{itemize}[leftmargin=2em]
+ \item include every edge of $\E(P)$ in the left half;
+ \item reflect every edge $\{i,j\}\in\E(Q)$ to
+ $\{2n+1-j,\,2n+1-i\}$ in the right half;
+ \item for $1\le i\le r$, add the cross-edge
+ \begin{equation}\label{eq:crossedges}
+  \{a_i,\,2n+1-b_i\}.
+ \end{equation}
+\end{itemize}
+This is a perfect matching.  It is noncrossing: internal edges are noncrossing; the right endpoints in \eqref{eq:crossedges} decrease as the left endpoints increase, so the cross-edges are nested; and an unmatched position of a Dyck prefix cannot lie strictly inside one of its matched edges, since it would still be on top of the stack when that edge closed.
+
+For an internal edge of $P$, membership in a block $\A_{\eps}(P)$ means that the corresponding two first-half bits are opposite.  The same is true for the reflected edges of $Q$, because complementing both endpoint bits preserves opposition.  Finally, the common label $\eps$ gives
+\[
+ f_{a_i}=v(F)_{b_i}
+ =1-f_{2n+1-b_i},
+\]so the two bits on each cross-edge \eqref{eq:crossedges} are opposite.  Hence every $F\in\mathcal F$ belongs to $\mathcal F_M$.  Both families have size $2^n$, so
+\[
+ \mathcal F=\mathcal F_M.
+\]
+
+The matching is unique.  Indeed, for every noncrossing perfect matching $M$,
+\begin{equation}\label{eq:recoverM}
+ \{i,j\}\in M
+ \quad\Longleftrightarrow\quad
+ w_i\ne w_j\ \text{for every }w\in\mathcal F_M.
+\end{equation}
+The forward implication is the definition.  If $i$ and $j$ lie on different matching edges, orient those two edges independently so that $w_i=w_j$.  Thus \eqref{eq:recoverM} recovers $M$ from the family.  Since the noncrossing perfect matchings of $[2n]$ are counted by $C_n$, the number of extremal families is exactly $C_n$.
+\end{proof}
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Shankar}
+U.~Shankar,
+\emph{Oddtown and eventown theorems for lattice paths},
+arXiv:2607.23117v1 [math.CO], 2026, \href{https://doi.org/10.48550/arXiv.2607.23117}{doi:10.48550/arXiv.2607.23117}.
+
+\bibitem{Stanley}
+R.~P. Stanley,
+\emph{Catalan Numbers},
+Cambridge University Press, Cambridge, 2015, \href{https://doi.org/10.1017/CBO9781139871495}{doi:10.1017/CBO9781139871495}.
+
+\end{thebibliography}
+
+\end{document}
