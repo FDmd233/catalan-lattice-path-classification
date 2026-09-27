@@ -116,7 +116,7 @@ Thus every block has size $2^k$ and lies in the weight level $k+\wt(\eps)$.  Put
 The next cancellation fact is the reason these blocks appear naturally.
 
 \begin{lemma}[cancellation]\label{lem:cancellation}
-Let $P$ be a Dyck prefix of length $m$.  Suppose $x,y\in\Om(P)$, and delete from both words every coordinate belonging to an edge of $\E(P)$.  If the resulting words are $\bar x,\bar y\in\bits^r$, then
+Let $P$ be a Dyck prefix of length $m$ with $r$ unmatched positions.  Suppose $x,y\in\Om(P)$, and delete from both words every coordinate belonging to an edge of $\E(P)$.  If the resulting words are $\bar x,\bar y\in\bits^r$, then
 \begin{equation}\label{eq:quotient}
  B_m(x,y)=B_r(\bar x,\bar y).
 \end{equation}
@@ -191,11 +191,7 @@ Lemma~\ref{lem:square} gives $y_s\ne y_{s+1}$ for every $y\in\Om(Q')$.  In a Dyc
 \end{proof}
 
 \begin{proposition}[cross-rigidity]\label{prop:crossrigidity}
-Let $P,Q$ be Dyck prefixes of length $m$.  Suppose that $B_m$ is constant on
-\[
- \A_{\eps}(P)\times\A_{\eta}(Q)
-\]
-for every pair of labels $\eps,\eta$.  Then $P=Q$.
+Let $P,Q$ be Dyck prefixes of length $m$.  Suppose that $B_m$ is constant on the product of every block of the $P$-partition with every block of the $Q$-partition.  Then $P=Q$.
 \end{proposition}
 \begin{proof}
 The hypothesis gives $P\preccurlyeq Q$.  Since $B_m$ is symmetric, it also gives $Q\preccurlyeq P$.  Lemma~\ref{lem:oneway} yields $\E(P)=\E(Q)$.  A Dyck prefix is determined by its matching edges: the right endpoints are the $D$-positions, and every other position is a $U$-position.  Hence $P=Q$.
