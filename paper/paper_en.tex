@@ -41,7 +41,7 @@
 \maketitle
 
 \begin{abstract}
-Shankar proved that a family of North-East lattice paths from $(0,0)$ to $(n,n)$ in which every two distinct paths have an even number of common edges has size at most $2^n$.  He constructed $C_n$ extremal families from the noncrossing perfect matchings of $[2n]$ and conjectured that these are all the extremal families.  I prove this conjecture.  The main step is an equality classification for the quadratic lemma underlying Shankar's upper bound: its equality cases are indexed by Dyck prefixes.  Two auxiliary rigidity statements, one for these Dyck-prefix partitions and one for the parity kernel on the Boolean cube, then determine the extremal relation completely.
+Shankar proved that a family of North-East lattice paths from $(0,0)$ to $(n,n)$ in which every two distinct paths have an even number of common edges has size at most $2^n$.  He constructed $C_n$ extremal families from the noncrossing perfect matchings of $[2n]$ and conjectured that these are all the extremal families.  This note proves the conjecture.  The main step is an equality classification for the quadratic lemma underlying Shankar's upper bound: its equality cases are indexed by Dyck prefixes.  Two auxiliary rigidity statements, one for these Dyck-prefix partitions and one for the parity kernel on the Boolean cube, then determine the extremal relation completely.
 \end{abstract}
 
 \noindent\textbf{Keywords.} lattice paths, extremal set theory, Eventown, Catalan numbers, noncrossing matchings.\\
@@ -60,14 +60,14 @@ Each $\mathcal F_M$ has size $2^n$ and is pairwise even-intersecting \cite[Secti
 The purpose of this note is to prove the conjecture in its stronger structural form.
 
 \begin{theorem}\label{thm:main}
-Let $\mathcal F$ be a family of lattice paths from $(0,0)$ to $(n,n)$ such that every two distinct members have an even number of common edges.  If $|\mathcal F|=2^n$, then there is a unique noncrossing perfect matching $M$ of $[2n]$ for which
+Let $n\ge1$, and let $\mathcal F$ be a family of lattice paths from $(0,0)$ to $(n,n)$ such that every two distinct members have an even number of common edges.  If $|\mathcal F|=2^n$, then there is a unique noncrossing perfect matching $M$ of $[2n]$ for which
 \[
  \mathcal F=\mathcal F_M.
 \]
 Consequently there are exactly $C_n$ extremal families.
 \end{theorem}
 
-The proof follows the equality structure in Shankar's argument rather than introducing a different upper bound.  I will use three ingredients.  First, equality in the quadratic lemma from \cite{Shankar} is classified by Dyck prefixes.  Second, two such equality partitions cannot be cross-compatible unless their Dyck prefixes have the same matched edges.  Third, a weight-preserving automorphism of the Boolean cube that preserves the path-intersection parity kernel is trivial.  These points are elementary, but the equality conditions have to be tracked without losing their quantifiers.
+The proof follows the equality structure in Shankar's argument rather than introducing a different upper bound.  It has three ingredients.  First, equality in the quadratic lemma from \cite{Shankar} is classified by Dyck prefixes.  Second, two such equality partitions cannot be cross-compatible unless their Dyck prefixes have the same matched edges.  Third, a weight-preserving automorphism of the Boolean cube that preserves the path-intersection parity kernel is trivial.  The essential point is to retain the full equality information throughout the induction.
 
 \section{The parity kernel and Dyck-prefix partitions}
 
@@ -176,7 +176,7 @@ I use induction on $m$.  Remove the last symbol from $P$ and $Q$, obtaining Dyck
 \]
 By induction, $\E(P^-)\subseteq\E(Q^-)$.
 
-If the last symbol of $P$ is $U$, this already gives $\E(P)\subseteq\E(Q)$.  Suppose instead that it is $D$, and let $e$ be its matched edge.  Delete from both prefixes all vertices belonging to the common matching $\E(P^-)$.  More precisely, apply Lemma~\ref{lem:cancellation} to the Dyck prefix $P^-U$, whose matching is exactly $\E(P^-)$.  The relation $\preccurlyeq$ survives this deletion; deleting complete matched pairs also preserves the Dyck-prefix property.  The reduced prefix coming from $P$ has the form
+If the last symbol of $P$ is $U$, this already gives $\E(P)\subseteq\E(Q)$.  Suppose instead that it is $D$, and let $e$ be its matched edge.  Delete the endpoints of all edges in $\E(P^-)$.  By induction these edges also belong to $\E(Q^-)$.  Lemma~\ref{lem:cancellation}, applied successively to the same matched pairs on both sides of \eqref{eq:preceq}, shows that every defining $B$-equality is unchanged; hence $\preccurlyeq$ descends to the reduced prefixes.  Removing the endpoints of a matched $U$--$D$ pair preserves the Dyck-prefix property.  On the $P$-side this is equivalently the cancellation associated with $P^-U$, whose matching is exactly $\E(P^-)$.  The reduced prefix coming from $P$ has the form
 \[
  U^sD
 \]
@@ -206,7 +206,7 @@ The hypothesis gives $P\preccurlyeq Q$.  Since $B_m$ is symmetric, it also gives
 Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  I state the equality classification at the same time.
 
 \begin{theorem}[quadratic equality classification]\label{thm:quadratic}
-Let $A_1,\ldots,A_t$ be pairwise disjoint subsets of $\bits^m$ such that
+Let $A_1,\ldots,A_t$ be nonempty pairwise disjoint subsets of $\bits^m$ such that
 \begin{enumerate}[label=(\roman*)]
  \item each $A_i$ is contained in one Hamming-weight level;
  \item $B_m(x,y)=m\pmod2$ for all $x,y\in A_i$;
@@ -224,7 +224,7 @@ Equality holds if and only if there is a Dyck prefix $P$ of length $m$ such that
 where $r$ is the number of unmatched positions of $P$.  The prefix $P$ is unique.
 \end{theorem}
 
-The only genuinely local obstruction in the equality analysis is the following Boolean-cube lemma.  It will also be used later for automorphisms.
+The equality analysis reduces to the following local Boolean-cube classification.  The same lemma will later control automorphisms.
 
 For $x,y\in\bits^d$, set
 \[
@@ -267,7 +267,7 @@ I record the short finite-state argument, since it prevents a hidden exceptional
 First consider the following auxiliary states.
 \begin{itemize}[leftmargin=2em]
  \item $S_d(k)$: $\wt(x)=\wt(y)=k$ and $\supp\Delta_{x,y}\subseteq\cL_k^{(d)}$;
- \item $E_d(k)$: $\wt(x)=\wt(y)=k$ and $\Delta_{x,y}=\ind{\cL_k^{(d)}}$;
+ \item $E_d(k)$: $\wt(x)=\wt(y)=k$ and $\Delta_{x,y}=\mathbf 1_{\cL_k^{(d)}}$;
  \item $L_d^-(k)$: $\wt(x)=k+1$, $\wt(y)=k$, and $\supp\Delta_{x,y}\subseteq\cL_k^{(d)}$;
  \item $L_d^+(k)$: the same weight condition, with support contained in $\cL_{k+1}^{(d)}$.
 \end{itemize}
@@ -276,16 +276,16 @@ A simultaneous induction on $d$, using \eqref{eq:delta-rec}, gives
  S_d(k)\Longrightarrow x=y,
  \qquad E_d(k),L_d^-(k),L_d^+(k)\text{ are impossible.}
 \end{equation}
-For completeness, here is the entire transition check.  In the state $E_d(k)$, equal terminal bits are impossible because the left side of \eqref{eq:delta-rec} is then independent of $\gamma$ while the target value changes between two consecutive weight layers; unequal terminal bits force $\Delta_{p,q}\equiv0$ for a pair of adjacent weights, contradicting the induction hypothesis for $L^-\!/L^+$.  For $L_d^-(k)$, the terminal patterns $00$ and $01$ give an immediate contradiction by evaluating \eqref{eq:delta-rec} on a word of weight $k+1$; the pattern $10$ reduces to $E_{d-1}(k)$, while $11$ reduces to $L_{d-1}^+(k-1)$.  Simultaneous complementation preserves common-edge parity.  Thus, after complementing the two words and the test word and then swapping the first two words, an $L^+$ state becomes an $L^-$ state.  Finally, in $S_d(k)$, equal terminal bits force $\Delta_{p,q}\equiv0$, so induction gives $p=q$; unequal terminal bits again force an adjacent-weight pair with zero profile, contradicting $L^-\!/L^+$.
+The transition rules are as follows.  A terminal pattern whose implied prefix weight lies outside $\{0,\ldots,d-1\}$ is infeasible; whenever a pattern is feasible, each weight level used in the argument below is nonempty.  In the state $E_d(k)$, equal terminal bits are impossible because the left side of \eqref{eq:delta-rec} is then independent of $\gamma$ while the target value changes between two consecutive weight layers; unequal terminal bits force $\Delta_{p,q}\equiv0$ for a pair of adjacent weights, contradicting the induction hypothesis for $L^-\!/L^+$.  For $L_d^-(k)$, the terminal patterns $00$ and $01$ give an immediate contradiction by evaluating \eqref{eq:delta-rec} on a word of weight $k+1$; the pattern $10$ reduces to $E_{d-1}(k)$, while $11$ reduces to $L_{d-1}^+(k-1)$.  Simultaneous complementation preserves common-edge parity.  Thus, after complementing the two words and the test word and then swapping the first two words, an $L^+$ state becomes an $L^-$ state.  Finally, in $S_d(k)$, equal terminal bits force $\Delta_{p,q}\equiv0$, so induction gives $p=q$; unequal terminal bits again force an adjacent-weight pair with zero profile, contradicting $L^-\!/L^+$.
 
 It remains to track two alternating states.  Let
 \begin{align*}
  M_d(k):&\quad \wt(x)=k+1,\ \wt(y)=k-1,
      \quad\supp\Delta_{x,y}\subseteq\cL_k^{(d)},\\
  T_d(k):&\quad \wt(x)=k+1,\ \wt(y)=k,
-     \quad\Delta_{x,y}=\ind{\cL_k^{(d)}\cup\cL_{k+1}^{(d)}}.
+     \quad\Delta_{x,y}=\mathbf 1_{\cL_k^{(d)}\cup\cL_{k+1}^{(d)}}.
 \end{align*}
-The terminal check is again immediate from \eqref{eq:delta-rec}, but I include it explicitly.  In an $M_d(k)$ state, the patterns $00$ and $01$ are contradicted by testing a word of weight $k+1$, while $11$ is contradicted by testing a word of weight $k-2$ (the pattern is feasible only when that layer is nonempty).  The only surviving pattern is $10$, and the prefix then has value $1$ on exactly the two layers $k-1,k$; hence it is a $T_{d-1}(k-1)$ pair.  In a $T_d(k)$ state with $d>1$, the patterns $00$ and $11$ are contradicted by testing a prefix word of weight $k$, and $10$ gives the same value for the two last-bit choices although the target values differ on one of the adjacent nonempty layers.  Thus only $01$ survives, and \eqref{eq:delta-rec} says that its prefix has support exactly on layer $k$, so it is an $M_{d-1}(k)$ pair.  Since $T_1(0)$ consists only of $(1,0)$, induction gives
+The remaining two states have the following transitions, again by \eqref{eq:delta-rec}.  In an $M_d(k)$ state, the patterns $00$ and $01$ are contradicted by testing a word of weight $k+1$, while $11$ is contradicted by testing a word of weight $k-2$ (the pattern is feasible only when that layer is nonempty).  The only surviving pattern is $10$, and the prefix then has value $1$ on exactly the two layers $k-1,k$; hence it is a $T_{d-1}(k-1)$ pair.  In a $T_d(k)$ state with $d>1$, the patterns $00$ and $11$ are contradicted by testing a prefix word of weight $k$, and $10$ gives the same value for the two last-bit choices although the target values differ on one of the adjacent nonempty layers.  Thus only $01$ survives, and \eqref{eq:delta-rec} says that its prefix has support exactly on layer $k$, so it is an $M_{d-1}(k)$ pair.  Since $T_1(0)$ consists only of $(1,0)$, induction gives
 \begin{align}
  M_{2k}(k)&:\quad
  (x,y)=\bigl(11(01)^{k-1},\ 00(10)^{k-1}\bigr)\qquad(k\ge1),\label{eq:Mform}\\
@@ -310,7 +310,7 @@ The $10$ case is exactly \eqref{eq:canonicalpair}.  The $01$ case, together with
 We next isolate the reconstruction step that occurs after the two inductive halves have become the same Dyck-prefix partition.
 
 
-For a family $\mathcal C=\{C_i\}$ of subsets of $\bits^{r+1}$, write
+For a family $\mathcal C=\{C_i\}$ of nonempty subsets of $\bits^{r+1}$, write
 \[
  C_i^a=\{z\in\bits^r:za\in C_i\},\qquad a\in\bits,
 \]
@@ -322,7 +322,7 @@ let $I(\mathcal C)$ be the indices for which both $C_i^0$ and $C_i^1$ are nonemp
 These are the two split families used in Shankar's induction.
 
 \begin{lemma}[reconstruction]\label{lem:reconstruction}
-Let $r\ge0$.  Suppose a family $\mathcal C$ of subsets of $\bits^{r+1}$ satisfies the three conditions of Theorem~\ref{thm:quadratic}, and suppose
+Let $r\ge0$.  Suppose a family $\mathcal C$ of nonempty subsets of $\bits^{r+1}$ satisfies the three conditions of Theorem~\ref{thm:quadratic}, and suppose
 \[
  \mathcal G_0(\mathcal C)=\mathcal G_1(\mathcal C)
  =\bigl\{\{z\}:z\in\bits^r\bigr\}.
@@ -385,11 +385,12 @@ No label of total weight $h$ or $h+1$ can be unpaired by \eqref{eq:singleinterac
  s1\ (\wt(s)=h),\quad
  s0\ (\wt(s)=h+1)
 \]
-must respectively be low, high, high, and low endpoints.  Hence every canonical pair indexed by a prefix of weight $h-1$, $h$, or $h+1$ is present.  Iterating over the connected sequence of weight levels $0,1,\ldots,r-1$ forces all canonical pairs.  This proves the dichotomy.
+must respectively be low, high, high, and low endpoints.  Hence every canonical pair whose prefix weight lies in
+ $\{h-1,h,h+1\}\cap\{0,\ldots,r-1\}$ is present.  Iterating along the connected sequence of weight levels $0,1,\ldots,r-1$ forces all canonical pairs.  This proves the dichotomy.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:quadratic}]
-I prove the inequality and its equality statement simultaneously by induction on $m$.  The case $m=0$ is immediate.  For every $i$, write
+Proceed by induction on $m$, proving the inequality and its equality statement simultaneously.  The case $m=0$ is immediate.  For every $i$, write
 \[
  A_i^a=\{x\in\bits^{m-1}:xa\in A_i\},\qquad a\in\bits,
 \]
@@ -397,7 +398,7 @@ and let $I$ be the set of indices for which both $A_i^0$ and $A_i^1$ are nonempt
 \begin{align*}
  \mathcal G_0&=\{A_i^0:A_i^0\ne\varnothing\}\cup\{A_i^1:i\in I\},\\
  \mathcal G_1&=\{A_i^1:A_i^1\ne\varnothing\}\cup\{A_i^0:i\in I\}.\end{align*}
-Each collection satisfies the three hypotheses in dimension $m-1$.  The weight condition is immediate, and \eqref{eq:recurrence} transfers internal and cross-constancy.  I spell out the only delicate point, disjointness.  Suppose, for example, that
+Each collection satisfies the three hypotheses in dimension $m-1$.  The weight condition is immediate, and \eqref{eq:recurrence} transfers internal and cross-constancy.  It remains to verify disjointness.  Suppose, for example, that
 \[
  u\in A_j^0\cap A_i^1
 \]
@@ -595,7 +596,8 @@ For an internal edge of $P$, membership in a block $\A_{\eps}(P)$ means that the
 \[
  f_{a_i}=v(F)_{b_i}
  =1-f_{2n+1-b_i},
-\]so the two bits on each cross-edge \eqref{eq:crossedges} are opposite.  Hence every $F\in\mathcal F$ belongs to $\mathcal F_M$.  Both families have size $2^n$, so
+\]
+so the two bits on each cross-edge \eqref{eq:crossedges} are opposite.  Hence every $F\in\mathcal F$ belongs to $\mathcal F_M$.  Both families have size $2^n$, so
 \[
  \mathcal F=\mathcal F_M.
 \]
@@ -609,6 +611,9 @@ The matching is unique.  Indeed, for every noncrossing perfect matching $M$,
 The forward implication is the definition.  If $i$ and $j$ lie on different matching edges, orient those two edges independently so that $w_i=w_j$.  Thus \eqref{eq:recoverM} recovers $M$ from the family.  Since the noncrossing perfect matchings of $[2n]$ are counted by $C_n$, the number of extremal families is exactly $C_n$.
 \end{proof}
 
+
+\paragraph{AI assistance.}
+OpenAI GPT-5.6 Sol was used during the investigation, proof checking, and preparation of this manuscript.
 
 \begin{thebibliography}{9}
 
