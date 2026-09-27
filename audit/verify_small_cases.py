@@ -67,7 +67,7 @@ def blocks(P):
     return out
 
 
-def check_recurrence(max_d=7):
+def check_recurrence(max_d=8):
     for d in range(1, max_d + 1):
         for p in words(d - 1):
             for q in words(d - 1):
@@ -78,7 +78,7 @@ def check_recurrence(max_d=7):
                         assert lhs == rhs
 
 
-def check_square_test(max_s=7):
+def check_square_test(max_s=8):
     for s in range(1, max_s + 1):
         for y in words(s + 1):
             lhs = all(
@@ -89,7 +89,7 @@ def check_square_test(max_s=7):
             assert lhs == rhs
 
 
-def check_localized_pairs(max_d=8):
+def check_localized_pairs(max_d=9):
     for d in range(1, max_d + 1):
         W = words(d)
         actual = set()
@@ -115,7 +115,7 @@ def check_localized_pairs(max_d=8):
         assert actual == expected
 
 
-def check_cancellation_and_cross_rigidity(max_n=7):
+def check_cancellation_and_cross_rigidity(max_n=8):
     for n in range(max_n + 1):
         prefixes = dyck_prefixes(n)
         for P in prefixes:
@@ -293,13 +293,13 @@ def check_main_theorem(max_n=4):
 
 def main():
     check_recurrence()
-    print("recurrence: PASS")
+    print("recurrence through d=8: PASS")
     check_square_test()
-    print("square test: PASS")
+    print("square test through s=8: PASS")
     check_localized_pairs()
-    print("localized-pair classification through d=8: PASS")
+    print("localized-pair classification through d=9: PASS")
     check_cancellation_and_cross_rigidity()
-    print("cancellation and cross-rigidity through length 7: PASS")
+    print("cancellation and cross-rigidity through length 8: PASS")
     check_reconstruction()
     print("reconstruction through r=4: PASS")
     check_main_theorem()
