@@ -132,10 +132,10 @@ No unmatched position of a Dyck prefix can lie strictly inside a matched edge: o
 
 It follows at once that the blocks \eqref{eq:dyckblock} satisfy the three compatibility conditions that will occur in Section~\ref{sec:equality}: within a block the value of $B_m$ is $r\equiv m\pmod2$, while on a product of two blocks it is constant.
 
-We shall also need a two-step test.  For $s\ge1$, write a word of length $s+1$ as $z\alpha\beta$ with $z\in\bits^{s-1}$.
+We shall also need the following two-step test.
 
 \begin{lemma}[square test]\label{lem:square}
-For $y=y'\beta\gamma\in\bits^{s+1}$, the following are equivalent:
+Let $s\ge1$ and $y=y'\beta\gamma\in\bits^{s+1}$ with $y'\in\bits^{s-1}$.  The following are equivalent:
 \begin{enumerate}[label=(\roman*)]
  \item $B_{s+1}(z10,y)=B_{s+1}(z01,y)$ for every $z\in\bits^{s-1}$;
  \item $\beta\ne\gamma$.
