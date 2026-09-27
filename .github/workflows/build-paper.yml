@@ -67,6 +67,13 @@ jobs:
             audit/expected_output.txt \
             > SHA256SUMS
 
+      - name: Upload compiled paper artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-paper
+          path: paper/paper_en.pdf
+          retention-days: 30
+
       - name: Commit compiled PDF and checksums
         if: github.event_name != 'pull_request'
         shell: bash
