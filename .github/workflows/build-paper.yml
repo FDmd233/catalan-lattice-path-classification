@@ -1,0 +1,80 @@
+name: Build paper and run audit
+
+on:
+  push:
+    paths:
+      - 'paper/paper_en.tex'
+      - 'audit/verify_small_cases.py'
+      - 'audit/expected_output.txt'
+      - '.github/workflows/build-paper.yml'
+  pull_request:
+    paths:
+      - 'paper/paper_en.tex'
+      - 'audit/verify_small_cases.py'
+      - 'audit/expected_output.txt'
+      - '.github/workflows/build-paper.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Compile paper
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: paper_en.tex
+          working_directory: paper
+          texlive_version: 2026
+
+      - name: Audit LaTeX log
+        shell: bash
+        run: |
+          set -euo pipefail
+          log='paper/paper_en.log'
+          pdf='paper/paper_en.pdf'
+          test -s "$log"
+          test -s "$pdf"
+          if grep -n -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined|There were undefined references|multiply defined|Overfull \\hbox|Underfull \\hbox|! LaTeX Error' "$log"; then
+            echo 'Publication-blocking LaTeX diagnostic found.'
+            exit 1
+          fi
+
+      - name: Run exact low-dimensional audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python audit/verify_small_cases.py | tee /tmp/catalan-audit.txt
+          diff -u audit/expected_output.txt /tmp/catalan-audit.txt
+
+      - name: Record checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum \
+            paper/paper_en.pdf \
+            paper/paper_en.tex \
+            audit/verify_small_cases.py \
+            audit/expected_output.txt \
+            > SHA256SUMS
+
+      - name: Commit compiled PDF and checksums
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/paper_en.pdf SHA256SUMS
+          if git diff --cached --quiet; then
+            echo "Generated files unchanged"
+            exit 0
+          fi
+          git commit -m "Build paper PDF"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
