@@ -15,6 +15,10 @@ on:
       - '.github/workflows/build-paper.yml'
   workflow_dispatch:
 
+concurrency:
+  group: build-paper-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -70,6 +74,23 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Do not publish generated files from a run whose source inputs have
+          # already been superseded on the branch.
+          git fetch origin "$GITHUB_REF_NAME"
+          for path in \
+            paper/paper_en.tex \
+            audit/verify_small_cases.py \
+            audit/expected_output.txt
+          do
+            local_blob="$(git hash-object "$path")"
+            remote_blob="$(git rev-parse "FETCH_HEAD:$path")"
+            if [ "$local_blob" != "$remote_blob" ]; then
+              echo "Source advanced during this run; skipping stale generated files."
+              exit 0
+            fi
+          done
+
           git add paper/paper_en.pdf SHA256SUMS
           if git diff --cached --quiet; then
             echo "Generated files unchanged"
