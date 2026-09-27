@@ -29,6 +29,8 @@ python audit/verify_small_cases.py
 
 The expected output is recorded in [`audit/expected_output.txt`](audit/expected_output.txt).
 
+GitHub Actions recompiles the manuscript from `paper/paper_en.tex`, runs the finite audit, and records SHA-256 hashes in [`SHA256SUMS`](SHA256SUMS).
+
 ## Source problem
 
 - MathDB #376236: https://mathdb.com/p/376236/catalan-classification-conjecture-for-extremal-even-intersec
