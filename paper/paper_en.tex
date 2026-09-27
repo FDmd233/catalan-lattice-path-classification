@@ -170,7 +170,7 @@ For Dyck prefixes $P,Q$ of length $m$,
 \end{lemma}
 
 \begin{proof}
-I use induction on $m$.  Remove the last symbol from $P$ and $Q$, obtaining Dyck prefixes $P^-$ and $Q^-$.  Every word in $\Om(Q^-)$ can be extended to a word in $\Om(Q)$: if the last symbol of $Q$ is $U$, choose either last bit; if it is $D$, the last bit is forced to be opposite to the bit at its matched opener.  Likewise, any two words in the same block for $P^-$ can be extended with a common last bit to two words in one block for $P$; when the last symbol of $P$ is $D$, the bit at its opener is fixed inside a block of $P^-$.  Since all words in one block have the same weight, the correction term in \eqref{eq:recurrence} is the same for the two extensions.  Hence
+Proceed by induction on $m$.  Remove the last symbol from $P$ and $Q$, obtaining Dyck prefixes $P^-$ and $Q^-$.  Every word in $\Om(Q^-)$ can be extended to a word in $\Om(Q)$: if the last symbol of $Q$ is $U$, choose either last bit; if it is $D$, the last bit is forced to be opposite to the bit at its matched opener.  Likewise, any two words in the same block for $P^-$ can be extended with a common last bit to two words in one block for $P$; when the last symbol of $P$ is $D$, the bit at its opener is fixed inside a block of $P^-$.  Since all words in one block have the same weight, the correction term in \eqref{eq:recurrence} is the same for the two extensions.  Hence
 \[
  P^-\preccurlyeq Q^-.
 \]
@@ -203,7 +203,7 @@ The hypothesis gives $P\preccurlyeq Q$.  Since $B_m$ is symmetric, it also gives
 
 \section{Equality in the quadratic lemma}\label{sec:equality}
 
-Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  I state the equality classification at the same time.
+Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  The equality classification is stated simultaneously.
 
 \begin{theorem}[quadratic equality classification]\label{thm:quadratic}
 Let $A_1,\ldots,A_t$ be nonempty pairwise disjoint subsets of $\bits^m$ such that
@@ -262,7 +262,7 @@ Write $u=p\alpha$, $v=q\beta$, and $z\gamma$ for the test word.  From \eqref{eq:
  +\ind{\alpha=\gamma}\ind{\wt(p)=\wt(z)}
  +\ind{\beta=\gamma}\ind{\wt(q)=\wt(z)}.
 \end{equation}
-I record the short finite-state argument, since it prevents a hidden exceptional case.
+The proof is a finite-state induction; the details below account for the exceptional alternating state.
 
 First consider the following auxiliary states.
 \begin{itemize}[leftmargin=2em]
@@ -339,11 +339,25 @@ Then exactly one of the following holds:
 \end{lemma}
 
 \begin{proof}
-Every member of $\mathcal C$ has one or two elements.  More precisely, each label $z\in\bits^r$ either contributes the two singleton blocks $\{z0\},\{z1\}$, or it is paired with another label: a two-element block has the form
+Every nonempty half $C_i^a$ is a singleton, since it occurs in one of the two displayed singleton partitions.  There is also no overlap between opposite halves when one of the corresponding blocks is split.  Indeed, suppose $i\in I(\mathcal C)$, $j\ne i$, and
+\[
+ z\in C_j^0\cap C_i^1.
+\]
+Choose $x\in C_i^0$.  Then $z1,x0\in C_i$, so condition~(ii) gives
+$B_{r+1}(z1,x0)=r+1\pmod2$.  Weight homogeneity gives
+$\wt(x)=\wt(z)+1$, and \eqref{eq:recurrence} therefore yields
+\[
+ B_{r+1}(z0,x0)=B_{r+1}(z1,x0)=r+1\pmod2.
+\]
+On the other hand,
+$B_{r+1}(z0,z1)=B_r(z,z)=r\pmod2$, contradicting constancy on
+$C_j\times C_i$.  The case $C_j^1\cap C_i^0\ne\varnothing$ is symmetric.
+
+It follows that each label $z\in\bits^r$ either contributes the two singleton blocks $\{z0\},\{z1\}$, or occurs in exactly one split block.  Such a block has the form
 \begin{equation}\label{eq:splitblock}
- \{u0,v1\},\qquad \wt(u)=\wt(v)+1.
+ \{u0,v1\},\qquad \wt(u)=\wt(v)+1,
 \end{equation}
-The labels used in such two-element blocks are disjoint.
+where the weight relation follows from condition~(i).  The labels used in distinct two-element blocks are disjoint.
 
 Fix a block \eqref{eq:splitblock}, and write $k=\wt(v)$.  If a label $z$ is unpaired, cross-constancy with the two singleton blocks $\{z0\}$ and $\{z1\}$ gives
 \begin{equation}\label{eq:singleinteraction}
@@ -362,7 +376,7 @@ Equations \eqref{eq:singleinteraction}--\eqref{eq:pairinteraction} imply that $\
 \]
 except possibly for the unique alternating pair in odd dimension.
 
-I first rule out that exception.  Suppose $r=2s+1\ge3$ and
+First exclude that exception.  Suppose $r=2s+1\ge3$ and
 \[
  u=1(10)^s,\qquad v=0(01)^s.
 \]
