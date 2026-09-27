@@ -13,7 +13,7 @@ The central structural result classifies the equality cases in the quadratic lem
 
 ## Low-dimensional audit
 
-The directory [`audit/`](audit/) contains an independent finite check of the local identities and classifications used in the proof. It verifies:
+The directory [`audit/`](audit/) contains a separate finite audit of the local identities and classifications used in the proof. It verifies:
 
 - the parity recurrence through dimension 7;
 - the localized-pair classification through dimension 8;
@@ -21,7 +21,7 @@ The directory [`audit/`](audit/) contains an independent finite check of the loc
 - the reconstruction dichotomy through dimension 4;
 - the complete extremal classification for \(n\le 4\), yielding \(1,2,5,14\) extremal families.
 
-These computations are auxiliary and are not used in place of the proofs in the manuscript.
+These computations are auxiliary and do not replace the proofs in the manuscript.
 
 ```bash
 python audit/verify_small_cases.py
