@@ -55,7 +55,7 @@ A North-East lattice path from $(0,0)$ to $(n,n)$ is a word in $\{E,N\}^{2n}$ wi
  \bigl\{w\in\{E,N\}^{2n}:\{w_i,w_j\}=\{E,N\}
         \text{ for every }\{i,j\}\in M\bigr\}.
 \end{equation}
-Each $\mathcal F_M$ has size $2^n$ and is pairwise even-intersecting \cite[Section~4]{Shankar}.  Since the noncrossing perfect matchings of $[2n]$ are counted by the Catalan number $C_n$ (see, for example, \cite{Stanley}), this gives at least $C_n$ extremal families.  Shankar conjectured that there are no others \cite[Conjecture~4.1]{Shankar}.
+Each $\mathcal F_M$ has size $2^n$ and is pairwise even-intersecting \cite[Section~4]{Shankar}.  Since the noncrossing perfect matchings of $[2n]$ are counted by the Catalan number $C_n$ (see, for example, \cite{Stanley}), this gives at least $C_n$ extremal families.  Shankar conjectured that there are no others \cite[Conjecture~4.1]{Shankar} and verified the conjecture for $n\le5$ \cite[Section~4]{Shankar}.
 
 The purpose of this note is to prove the conjecture in its stronger structural form.
 
@@ -170,7 +170,7 @@ For Dyck prefixes $P,Q$ of length $m$,
 \end{lemma}
 
 \begin{proof}
-Proceed by induction on $m$.  Remove the last symbol from $P$ and $Q$, obtaining Dyck prefixes $P^-$ and $Q^-$.  Every word in $\Om(Q^-)$ can be extended to a word in $\Om(Q)$: if the last symbol of $Q$ is $U$, choose either last bit; if it is $D$, the last bit is forced to be opposite to the bit at its matched opener.  Likewise, any two words in the same block for $P^-$ can be extended with a common last bit to two words in one block for $P$; when the last symbol of $P$ is $D$, the bit at its opener is fixed inside a block of $P^-$.  Since all words in one block have the same weight, the correction term in \eqref{eq:recurrence} is the same for the two extensions.  Hence
+Proceed by induction on $m$.  The case $m=0$ is immediate.  Assume $m\ge1$, and remove the last symbol from $P$ and $Q$, obtaining Dyck prefixes $P^-$ and $Q^-$.  Every word in $\Om(Q^-)$ can be extended to a word in $\Om(Q)$: if the last symbol of $Q$ is $U$, choose either last bit; if it is $D$, the last bit is forced to be opposite to the bit at its matched opener.  Likewise, any two words in the same block for $P^-$ can be extended with a common last bit to two words in one block for $P$; when the last symbol of $P$ is $D$, the bit at its opener is fixed inside a block of $P^-$.  Since all words in one block have the same weight, the correction term in \eqref{eq:recurrence} is the same for the two extensions.  Hence
 \[
  P^-\preccurlyeq Q^-.
 \]
