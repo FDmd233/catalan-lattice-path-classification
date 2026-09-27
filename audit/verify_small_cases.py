@@ -144,6 +144,51 @@ def check_cancellation_and_cross_rigidity(max_n=8):
                     assert P == Q
 
 
+def check_quadratic_equality(max_m=4):
+    for m in range(max_m + 1):
+        W = words(m)
+        parity = m % 2
+        candidates = []
+        for level in range(m + 1):
+            L = [x for x in W if wt(x) == level]
+            for mask in range(1, 1 << len(L)):
+                A = frozenset(L[i] for i in range(len(L)) if mask >> i & 1)
+                if all(B(x, y) == parity for x in A for y in A):
+                    candidates.append(A)
+
+        compat = [[False] * len(candidates) for _ in candidates]
+        for i in range(len(candidates)):
+            for j in range(i + 1, len(candidates)):
+                A, C = candidates[i], candidates[j]
+                if A.isdisjoint(C) and len({B(x, y) for x in A for y in C}) == 1:
+                    compat[i][j] = compat[j][i] = True
+
+        target = 2**m
+        actual = set()
+
+        def rec(start, chosen, used, score):
+            if score == target:
+                actual.add(frozenset(candidates[i] for i in chosen))
+                return
+            if score > target:
+                return
+            for i in range(start, len(candidates)):
+                A = candidates[i]
+                next_score = score + len(A) ** 2
+                if next_score > target or not A.isdisjoint(used):
+                    continue
+                if any(not compat[i][j] for j in chosen):
+                    continue
+                rec(i + 1, chosen + [i], used | set(A), next_score)
+
+        rec(0, [], set(), 0)
+        expected = {
+            frozenset(frozenset(A) for A in blocks(P).values())
+            for P in dyck_prefixes(m)
+        }
+        assert actual == expected
+
+
 def valid_reconstruction(r, pairs):
     W = words(r)
     used = {x for edge in pairs for x in edge}
@@ -300,6 +345,8 @@ def main():
     print("localized-pair classification through d=9: PASS")
     check_cancellation_and_cross_rigidity()
     print("cancellation and cross-rigidity through length 8: PASS")
+    check_quadratic_equality()
+    print("quadratic equality classification through m=4: PASS")
     check_reconstruction()
     print("reconstruction through r=4: PASS")
     check_main_theorem()
