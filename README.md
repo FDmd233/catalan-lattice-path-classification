@@ -18,6 +18,7 @@ The directory [`audit/`](audit/) contains a separate finite audit of the local i
 - the parity recurrence through dimension 8;
 - the localized-pair classification through dimension 9;
 - Dyck cancellation and cross-rigidity through length 8;
+- the quadratic equality classification itself through dimension 4;
 - the reconstruction dichotomy through dimension 4;
 - the complete extremal classification for \(n\le 4\), yielding \(1,2,5,14\) extremal families.
 
