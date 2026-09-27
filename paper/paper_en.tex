@@ -479,7 +479,12 @@ plus, when $r\ge3$ is odd, the single exceptional edge
 \[
  1(10)^{(r-1)/2}\sim0(01)^{(r-1)/2}.
 \]
-The relation is preserved by $\phi$ because both weight and $B_r$ are preserved.
+The relation is preserved by $\phi$.  Indeed,
+\[
+ \Delta_{\phi(u),\phi(v)}(\phi(z))
+ =\Delta_{u,v}(z)
+\]
+for every $z$, and $\phi$ preserves Hamming-weight levels.
 
 If $r$ is even, \eqref{eq:canonicalmatching} is therefore preserved as a set.  If $r\ge3$ is odd, the two endpoints of the exceptional edge are the only vertices of degree two in the relation graph; hence the exceptional edge is intrinsically distinguished, and after removing it the canonical matching is again preserved.  The cases $r=0,1$ are immediate.  Thus in all cases $\phi$ maps every canonical pair to a canonical pair.  Weight preservation prevents the two endpoints from being exchanged, so there is a weight-preserving bijection $\psi:\bits^{r-1}\to\bits^{r-1}$ such that
 \[
