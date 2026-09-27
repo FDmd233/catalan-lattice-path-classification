@@ -203,7 +203,7 @@ The hypothesis gives $P\preccurlyeq Q$.  Since $B_m$ is symmetric, it also gives
 
 \section{Equality in the quadratic lemma}\label{sec:equality}
 
-Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  The equality classification is stated simultaneously.
+Shankar's proof of the even-intersection bound rests on the following inequality \cite[Lemma~2.3]{Shankar}.  Empty members do not affect the inequality and may be discarded.  The equality classification is stated simultaneously.
 
 \begin{theorem}[quadratic equality classification]\label{thm:quadratic}
 Let $A_1,\ldots,A_t$ be nonempty pairwise disjoint subsets of $\bits^m$ such that
@@ -271,12 +271,13 @@ First consider the following auxiliary states.
  \item $L_d^-(k)$: $\wt(x)=k+1$, $\wt(y)=k$, and $\supp\Delta_{x,y}\subseteq\cL_k^{(d)}$;
  \item $L_d^+(k)$: the same weight condition, with support contained in $\cL_{k+1}^{(d)}$.
 \end{itemize}
-A simultaneous induction on $d$, using \eqref{eq:delta-rec}, gives
+The case $d=0$ is immediate.  A simultaneous induction on $d$, using \eqref{eq:delta-rec}, gives
 \begin{equation}\label{eq:auxstates}
  S_d(k)\Longrightarrow x=y,
  \qquad E_d(k),L_d^-(k),L_d^+(k)\text{ are impossible.}
 \end{equation}
-The transition rules are as follows.  A terminal pattern whose implied prefix weight lies outside $\{0,\ldots,d-1\}$ is infeasible; whenever a pattern is feasible, each weight level used in the argument below is nonempty.  In the state $E_d(k)$, equal terminal bits are impossible because the left side of \eqref{eq:delta-rec} is then independent of $\gamma$ while the target value changes between two consecutive weight layers; unequal terminal bits force $\Delta_{p,q}\equiv0$ for a pair of adjacent weights, contradicting the induction hypothesis for $L^-\!/L^+$.  For $L_d^-(k)$, the terminal patterns $00$ and $01$ give an immediate contradiction by evaluating \eqref{eq:delta-rec} on a word of weight $k+1$; the pattern $10$ reduces to $E_{d-1}(k)$, while $11$ reduces to $L_{d-1}^+(k-1)$.  Simultaneous complementation preserves common-edge parity.  Thus, after complementing the two words and the test word and then swapping the first two words, an $L^+$ state becomes an $L^-$ state.  Finally, in $S_d(k)$, equal terminal bits force $\Delta_{p,q}\equiv0$, so induction gives $p=q$; unequal terminal bits again force an adjacent-weight pair with zero profile, contradicting $L^-\!/L^+$.
+The transition rules are as follows.  A terminal pattern whose implied prefix weight lies outside $\{0,\ldots,d-1\}$ is infeasible; whenever a pattern is feasible, each weight level used in the argument below is nonempty.  In the state $E_d(k)$, equal terminal bits are impossible because the left side of \eqref{eq:delta-rec} is then independent of $\gamma$ while the target value changes between two consecutive weight layers; unequal terminal bits force $\Delta_{p,q}\equiv0$ for a pair of adjacent weights, contradicting the induction hypothesis for $L^-\!/L^+$.  For $L_d^-(k)$, the terminal patterns $00$ and $01$ give an immediate contradiction by evaluating \eqref{eq:delta-rec} on a word of weight $k+1$; the pattern $10$ reduces to $E_{d-1}(k)$, while $11$ reduces to $L_{d-1}^+(k-1)$.  If $\bar x$ denotes the bitwise complement of $x$, then
+$B_d(\bar x,\bar z)=B_d(x,z)$.  Hence simultaneous complementation of the two words and the test word, followed by swapping the first two words, sends an $L^+$ state to an $L^-$ state.  Finally, in $S_d(k)$, equal terminal bits force $\Delta_{p,q}\equiv0$, so induction gives $p=q$; unequal terminal bits again force an adjacent-weight pair with zero profile, contradicting $L^-\!/L^+$.
 
 It remains to track two alternating states.  Let
 \begin{align*}
