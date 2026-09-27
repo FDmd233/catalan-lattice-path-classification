@@ -1,0 +1,10 @@
+recurrence: PASS
+square test: PASS
+localized-pair classification through d=8: PASS
+cancellation and cross-rigidity through length 7: PASS
+reconstruction through r=4: PASS
+n=1: 1 extremal families
+n=2: 2 extremal families
+n=3: 5 extremal families
+n=4: 14 extremal families
+full extremal classification through n=4: PASS
