@@ -10,19 +10,19 @@ reconstruction steps of the manuscript.
 ## Kernel recurrence
 
 For words $x,y,z\in\{0,1\}^d$, write
-$
+$$
 \Delta_{x,y}^{(d)}(z)=B_d(x,z)+B_d(y,z).
-$
+$$
 Write $\mathcal L_j^{(d)}=\{z:\operatorname{wt}(z)=j\}$, with an
 out-of-range layer interpreted as empty.
 For $x=p\alpha,\ y=q\beta$, and a test word $z\gamma$,
-$
+$$
 \Delta_{p\alpha,q\beta}^{(d)}(z\gamma)
 =\Delta_{p,q}^{(d-1)}(z)
  +[\alpha=\gamma][\operatorname{wt}p=\operatorname{wt}z]
  +[\beta=\gamma][\operatorname{wt}q=\operatorname{wt}z].
 \tag{*}
-$
+$$
 All operations in (*) are in $\mathbb F_2$. A terminal pattern
 is *feasible* only if the prescribed prefix weights belong to
 $0,\ldots,d-1$.
@@ -102,17 +102,17 @@ them equal.
 The **only** base state is $T_1(0)=(1,0)$;
 no $M_1$ state is feasible. Iterating the unique allowed
 transitions gives precisely
-$
+$$
 M_{2k}(k):
  \bigl(11(01)^{k-1},00(10)^{k-1}\bigr)
  \quad(k\ge1),
-$
+$$
 and
-$
+$$
 T_{2k+1}(k):
  \bigl(1(10)^k,0(01)^k\bigr)
  \quad(k\ge0).
-$
+$$
 Other parameter or parity choices are impossible.
 
 ## Localized pairs: final case split
