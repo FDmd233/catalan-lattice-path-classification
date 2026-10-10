@@ -30,6 +30,10 @@ python audit/verify_small_cases.py
 
 The expected output is recorded in [`audit/expected_output.txt`](audit/expected_output.txt). GitHub Actions recompiles the manuscript, runs the finite audit, and records SHA-256 hashes in [`SHA256SUMS`](SHA256SUMS).
 
+## All-dimensional proof audit
+
+The [localized-pair induction audit](verification/localized_pair_induction.md) expands every final-bit transition of the central finite-state classification, including the odd-dimensional alternating exception and all endpoint cases. Unlike the finite audit, this is an **all-dimensional symbolic induction**. It covers one key lemma only; the full Catalan theorem still depends on the manuscript's separate cross-rigidity, reconstruction, and extremal-relation proofs.
+
 ## Source problem
 
 - [MathDB #376236](https://mathdb.com/p/376236/catalan-classification-conjecture-for-extremal-even-intersec)
