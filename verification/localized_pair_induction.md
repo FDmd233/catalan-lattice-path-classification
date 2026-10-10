@@ -52,7 +52,7 @@ layers; \((\alpha,\beta)\) is the pair of final bits:
 
 | State | 00 | 01 | 10 | 11 |
 |---|---|---|---|---|
-| \(S_d(k)\) | prefix \(S_{d-1}(k)\) | prefix \(L^+_{d-1}(k-1)\) | prefix \(L^-_{d-1}(k-1)\) | prefix \(S_{d-1}(k-1)\) |
+| \(S_d(k)\) | prefix \(S_{d-1}(k)\) | prefix \(L^+_{d-1}(k-1)\) | prefix \(L^-_{d-1}(k-1)\), after exchanging \(p,q\) | prefix \(S_{d-1}(k-1)\) |
 | \(E_d(k)\) | impossible | adjacent-weight prefix with zero profile | adjacent-weight prefix with zero profile | impossible |
 | \(L^-_d(k)\) | impossible | impossible | prefix \(E_{d-1}(k)\) | prefix \(L^+_{d-1}(k-1)\) |
 
