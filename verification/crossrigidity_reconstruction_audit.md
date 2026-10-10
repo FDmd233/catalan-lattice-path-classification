@@ -1,7 +1,7 @@
 # Two all-dimensional rigidity audits: Dyck cross-rigidity and cube reconstruction
 
 This note checks two **non-computational** links between the localized-pair
-lemma and the main Catalan classification in \`paper/paper_en.tex\`.
+lemma and the main Catalan classification in `paper/paper_en.tex`.
 The notation and \(\mathbb F_2\)-valued parity kernel \(B_m\) agree with
 Sections 2--5 of the paper and with Shankar, arXiv:2607.23117,
 Lemma 2.3. No finite exhaustive search is used here.
@@ -211,7 +211,7 @@ uses:
 
 The cube rigidity and final relation-to-matching
 reduction still have to be read in conjunction
-with Sections 4--5 of \`paper/paper_en.tex\`.
+with Sections 4--5 of `paper/paper_en.tex`.
 The two arguments above are independent of
 all finite brute-force certificates and of
 unpublished external source claims.
