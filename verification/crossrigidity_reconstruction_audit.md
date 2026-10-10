@@ -17,11 +17,11 @@ $B_m(x,y)=B_m(x',y)$ for every $x,x'$ in the same
 $P$-block and every $y\in\Omega(Q)$.
 
 **Claim.**
-$
+$$
  P\preccurlyeq Q \Longrightarrow
  \mathcal E(P)\subseteq\mathcal E(Q)
  \quad\text{for all lengths }m.
-$
+$$
 
 *Proof by induction.* Delete the final symbol of both prefixes,
 obtaining $P^-,Q^-$. Every word of $\Omega(Q^-)$ extends
@@ -31,10 +31,10 @@ $P$: if the last symbol is $D$, the opener is unmatched
 in $P^-$ and therefore its bit is fixed within that block.
 Because the two prefixes have equal weight, the last-coordinate
 correction in
-$
+$$
  B_m(p\alpha,q\beta)=B_{m-1}(p,q)
  +[\alpha=\beta][\operatorname{wt}p=\operatorname{wt}q]
-$
+$$
 is equal for the two lifted comparisons. Therefore
 $P^-\preccurlyeq Q^-$ and, by induction,
 $\mathcal E(P^-)\subseteq\mathcal E(Q^-)$.
@@ -56,11 +56,11 @@ $\{z10,z01\}$ with $z\in\{0,1\}^{s-1}$.
 Write $y=y'\beta\gamma$ and let
 $h=\operatorname{wt}(z)$, $q=\operatorname{wt}(y')$.
 A direct two-step recurrence gives
-$
+$$
  B_{s+1}(z10,y)+B_{s+1}(z01,y)
  =[h=q]+[\gamma=0][h=q+\beta-1]
                  +[\gamma=1][h=q+\beta].
-$
+$$
 If $\beta\ne\gamma$, this is identically zero.
 If $\beta=\gamma$, choose $h=q$, which is
 possible since $0\le q\le s-1$; the expression is 1.
@@ -84,9 +84,9 @@ each $Q$-block, it gives $P\preccurlyeq Q$ and
 $Q\preccurlyeq P$. Therefore
 $\mathcal E(P)=\mathcal E(Q)$; the matching fixes
 all $D$-positions and hence the entire Dyck prefix:
-$
+$$
  \boxed{P=Q}.
-$
+$$
 
 ## 2. Independent reconstruction of the two singleton partitions
 
@@ -107,28 +107,28 @@ $\mathcal G_0$ or $\mathcal G_1$.
 Thus each label is either represented by the two
 singleton blocks $z0,z1$, or it participates in
 exactly one two-element block
-$
+$$
  \{u0,v1\},\qquad \operatorname{wt}u
  =\operatorname{wt}v+1.
-$
+$$
 Different split blocks use disjoint labels.
 
 Fix such a block and put $k=\operatorname{wt}v$.
 For a singleton label $z$, comparison with
 both singleton blocks gives simultaneously
-$
+$$
  \Delta_{u,v}(z)=[\operatorname{wt}z=k+1]
                =[\operatorname{wt}z=k].
-$
+$$
 Therefore $\operatorname{wt}z\notin\{k,k+1\}$
 and the difference kernel vanishes there.
 For a second split block $\{a0,b1\}$, comparing
 the two rows of the $2\times2$ parity matrix gives
-$
+$$
  \Delta_{u,v}(a)=[\operatorname{wt}a=k+1],
  \qquad
  \Delta_{u,v}(b)=[\operatorname{wt}b=k].
-$
+$$
 (The two labels $u,v$ themselves lie in the
 allowed levels.) Hence $\Delta_{u,v}$ is supported
 only on weights $k,k+1$.
@@ -154,23 +154,23 @@ have this property; contradiction. For $s=1$,
 the exceptional block
 $\{1100,0011\}$ and the forced canonical block
 $\{0110,0101\}$ have cross-parity matrix
-$
+$$
  \begin{pmatrix}1&0\\1&0\end{pmatrix},
-$
+$$
 violating cross-constancy.
 
 **All-or-nothing canonical propagation.**
 Suppose one canonical pair $\{t10,t01\}$
 occurs, $h=\operatorname{wt}t$.
 Its difference kernel is
-$
+$$
  \Delta_{t1,t0}(z)
  =[\operatorname{wt}(z_1\cdots z_{r-1})=h].
-$
+$$
 No label of weight $h$ or $h+1$
 can be unpaired. The preceding row/column
 equalities force, for each $s\in\{0,1\}^{r-1}$:
-$
+$$
  \begin{array}{c|c}
   \text{label} & \text{forced role}\\ \hline
   s0,\ \operatorname{wt}s=h & \text{low endpoint}\\
@@ -178,20 +178,20 @@ $
   s1,\ \operatorname{wt}s=h & \text{high endpoint}\\
   s0,\ \operatorname{wt}s=h+1 & \text{low endpoint}
  \end{array}
-$
+$$
 Each of these roles forces a canonical pair with
 prefix weight $h-1,h$, or $h+1$, where feasible.
 Iteration along the connected chain of weights
 $0,1,\dots,r-1$ forces **all** canonical pairs.
 
 Consequently the only possibilities are:
-$
+$$
  \mathcal C=
   \bigl\{\{z0\},\{z1\}:z\in\{0,1\}^r\bigr\}
 \quad\text{or}\quad
  \mathcal C=
   \bigl\{\{t10,t01\}:t\in\{0,1\}^{r-1}\bigr\}.
-$
+$$
 The latter needs $r\ge1$.
 For $r=0$, the former is the only possibility.
 This is exactly the reconstruction dichotomy.
