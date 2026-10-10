@@ -218,7 +218,7 @@ of every **global logical interface** from
 Shankar's inequality to the Catalan theorem.
 The only local finite-state input is the
 all-dimensional lemma separately expanded
-in \`localized_pair_induction.md\`.
+in `localized_pair_induction.md`.
 Together, the three verification notes
 cover the manuscript's entire main proof
 architecture without invoking a finite
