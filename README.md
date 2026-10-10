@@ -36,7 +36,7 @@ The [localized-pair induction audit](verification/localized_pair_induction.md) e
 
 - [All-dimensional cross-rigidity and reconstruction proofs](verification/crossrigidity_reconstruction_audit.md) independently check both the inclusion of Dyck-prefix matching edges and the all-or-nothing reconstruction of canonical split blocks. The arguments use no finite search and make their remaining dependencies explicit.
 
-- [Complete final-reduction audit](verification/final_classification_proof_audit.md) independently traces Shankar's quadratic equality, cube rigidity, extremal bipartite relations, and the unique noncrossing matching for arbitrary \(n\). Together with the two preceding supplements, this covers the **whole mathematical dependency chain**, without claiming machine formalization or MathDB acceptance.
+- [Complete final-reduction audit](verification/final_classification_proof_audit.md) independently traces Shankar's quadratic equality, cube rigidity, extremal bipartite relations, and the unique noncrossing matching for arbitrary $n$. Together with the two preceding supplements, this covers the **whole mathematical dependency chain**, without claiming machine formalization or MathDB acceptance.
 
 ## Source problem
 
