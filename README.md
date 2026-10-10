@@ -34,6 +34,8 @@ The expected output is recorded in [`audit/expected_output.txt`](audit/expected_
 
 The [localized-pair induction audit](verification/localized_pair_induction.md) expands every final-bit transition of the central finite-state classification, including the odd-dimensional alternating exception and all endpoint cases. Unlike the finite audit, this is an **all-dimensional symbolic induction**. It covers one key lemma only; the full Catalan theorem still depends on the manuscript's separate cross-rigidity, reconstruction, and extremal-relation proofs.
 
+- [All-dimensional cross-rigidity and reconstruction proofs](verification/crossrigidity_reconstruction_audit.md) independently check both the inclusion of Dyck-prefix matching edges and the all-or-nothing reconstruction of canonical split blocks. The arguments use no finite search and make their remaining dependencies explicit.
+
 ## Source problem
 
 - [MathDB #376236](https://mathdb.com/p/376236/catalan-classification-conjecture-for-extremal-even-intersec)
